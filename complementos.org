@@ -1,0 +1,113 @@
+#+title: Complementos
+
+#+property: header-args:ipython :session complementos :results raw drawer
+
+Diámetro de los complementos de las gráficas que tienen diámetro 2.
+
+#+begin_src ipython
+%matplotlib inline
+import networkx as nx
+import matplotlib.pyplot as plt
+from pycliques.lists import enlist_graphs
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[1]:
+:end:
+#+begin_src ipython
+lista6=enlist_graphs(6)
+lista6_d2=[g for g in lista6 if nx.diameter(g)==2 and nx.is_connected(nx.complement(g))]
+len(lista6_d2)
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[2]:
+: 16
+:end:
+#+begin_src ipython
+set([nx.diameter(nx.complement(g)) for g in lista6_d2])
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[3]:
+: {2, 3, 4, 5}
+:end:
+
+#+begin_src ipython
+lista7=enlist_graphs(7)
+lista7_d2=[g for g in lista7 if nx.diameter(g)==2 and nx.is_connected(nx.complement(g))]
+len(lista7_d2)
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[4]:
+: 183
+:end:
+
+#+begin_src ipython
+set([nx.diameter(nx.complement(g)) for g in lista7_d2])
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[5]:
+: {2, 3, 4, 5, 6}
+:end:
+
+#+begin_src ipython
+lista7_d2_cd2=[g for g in lista7_d2 if nx.diameter(nx.complement(g))==2]
+len(lista7_d2_cd2)
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[8]:
+: 18
+:end:
+#+begin_src ipython
+nx.draw(lista7_d2_cd2[0])
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[9]:
+[[file:./obipy-resources/3513IAW.png]]
+:end:
+
+#+begin_src ipython
+plt.figure(figsize=(10, 10))
+
+for i in range(9):
+    index = 330+i+1
+    plt.subplot(index)
+    nx.draw(lista7_d2_cd2[i])
+
+plt.show()
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[10]:
+[[file:./obipy-resources/3513VKc.png]]
+:end:
+
+#+begin_src ipython
+plt.figure(figsize=(10, 10))
+
+for i in range(9):
+    index = 330+i+1
+    plt.subplot(index)
+    nx.draw(lista7_d2_cd2[i+9])
+
+plt.show()
+#+end_src
+
+#+RESULTS:
+:results:
+# Out[11]:
+[[file:./obipy-resources/3513iUi.png]]
+:end:
